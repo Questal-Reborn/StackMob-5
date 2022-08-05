@@ -40,7 +40,10 @@ public class NmsFakeArmorStand implements FakeArmorStand {
         ((CraftPlayer) player).getHandle().b.a(packetPlayOutSpawn);
         DataWatcher watcher = new DataWatcher(entityArmorStand);
         watcher.a(new DataWatcherObject<>(0, DataWatcherRegistry.a), (byte) 0x20);
-        watcher.a(new DataWatcherObject<>(2, DataWatcherRegistry.f), Optional.ofNullable(IChatBaseComponent.ChatSerializer.a(GsonComponentSerializer.gson().serializeToTree(name))));
+        // TODO: fix brigadier issue
+        // watcher.a(new DataWatcherObject<>(2, DataWatcherRegistry.f), Optional.ofNullable(IChatBaseComponent.ChatSerializer.a(GsonComponentSerializer.gson().serializeToTree(name))));
+        // Temporarly repplaced since the Message brigadier class was not found during build
+        watcher.a(new DataWatcherObject<>(2, DataWatcherRegistry.f));
         watcher.a(new DataWatcherObject<>(3, DataWatcherRegistry.i), true);
         watcher.a(new DataWatcherObject<>(5, DataWatcherRegistry.i), true);
         watcher.a(new DataWatcherObject<>(15, DataWatcherRegistry.a), (byte) 0x10);
@@ -52,7 +55,10 @@ public class NmsFakeArmorStand implements FakeArmorStand {
     @Override
     public void updateName(Component newName) {
         DataWatcher watcher = new DataWatcher(entityArmorStand);
-        watcher.a(new DataWatcherObject<>(2, DataWatcherRegistry.f), Optional.ofNullable(IChatBaseComponent.ChatSerializer.a(GsonComponentSerializer.gson().serializeToTree(newName))));
+        // TODO: fix brigadier issue
+        // watcher.a(new DataWatcherObject<>(2, DataWatcherRegistry.f), Optional.ofNullable(IChatBaseComponent.ChatSerializer.a(GsonComponentSerializer.gson().serializeToTree(newName))));
+        // Temporarily replaced with brigadier issue
+        watcher.a(new DataWatcherObject<>(2, DataWatcherRegistry.f));
         PacketPlayOutEntityMetadata packetPlayOutEntityMetadata = new PacketPlayOutEntityMetadata(entityArmorStand.ae(), watcher, true);
         ((CraftPlayer) player).getHandle().b.a(packetPlayOutEntityMetadata);
     }
