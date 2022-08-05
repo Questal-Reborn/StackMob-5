@@ -4,7 +4,6 @@ import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
 import net.kyori.adventure.text.format.TextColor;
 import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
-import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -20,9 +19,10 @@ import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Vector;
 import java.util.concurrent.CompletableFuture;
 
-public class Utilities {
+public class Utilities<T> {
 
     public static final Component PREFIX = Component.text("StackMob ").color(TextColor.color(0, 206, 209)).append(Component.text(">> ").color(NamedTextColor.GRAY)).compact();
     public static final String PREFIX_STRING = LegacyComponentSerializer.legacySection().serialize(PREFIX);
@@ -51,6 +51,17 @@ public class Utilities {
 
     public static Component createComponent(String toTranslate) {
         return legacyComponentSerializer.deserialize(toTranslate);
+    }
+
+    public static <B> B[] arrayRange(B[] array, int startIndex, int endIndex) {
+        // Create array of appropriate length
+        B[] result = (B[])(new Vector<B>(array.length - startIndex - (array.length - endIndex)).toArray());
+
+        for (int i = startIndex; i < endIndex; i++) {
+            result[i - startIndex] = array[i];
+        }
+
+        return result;
     }
 
     public static List<Integer> split(int dividend, int divisor) {

@@ -1,7 +1,5 @@
 package uk.antiperson.stackmob.config;
 
-import org.apache.commons.lang3.math.NumberUtils;
-
 import java.util.Collections;
 import java.util.List;
 
@@ -36,13 +34,13 @@ public class ConfigValue {
 
     public double getDouble() {
         if (getValue() instanceof Integer) {
-            return NumberUtils.toInt(getValue().toString());
+            return Integer.parseInt(getValue().toString());
         }
-        return getValue() instanceof Double ? NumberUtils.toDouble(getValue().toString()) : 0;
+        return getValue() instanceof Double ? Double.parseDouble(getValue().toString()) : 0;
     }
 
     public int getInt() {
-        return getValue() instanceof Number ? NumberUtils.toInt(getValue().toString()) : 0;
+        return getValue() instanceof Number ? Integer.parseInt(getValue().toString()) : 0;
     }
 
     public String getString() {
