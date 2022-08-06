@@ -293,18 +293,18 @@ public class EntityConfig {
 
     private boolean isEntityTypeInList(String path) {
         ConfigList list = getList(path);
-        if (list.isInverted() && list.rawContains(type.toString())) {
-            return false;
-        }
+
         for (EntityGrouping entityGrouping : EntityGrouping.values()) {
             if (!list.rawContains(entityGrouping.toString())) {
                 continue;
             }
+
             if (entityGrouping.isEntityMemberOf(type.getEntityClass())) {
                 return !list.isInverted();
             }
         }
-        return list.contains(type.toString());
+
+        return list.contains(type.name().toUpperCase());
     }
 
     public EntityType getType() {
