@@ -22,10 +22,9 @@ public class ConfigList {
      * @return whether this object is in the list.
      */
     public boolean contains(String item) {
-        if (inverted){
-            return !rawContains(item);
-        }
-        return rawContains(item);
+        // Simply bitwise xor, works faster
+        // avoid branching where possible
+        return rawContains(item) ^ inverted;
     }
 
     public boolean isInverted() {
@@ -39,6 +38,4 @@ public class ConfigList {
     public List<Integer> asIntList() {
         return configFile.getIntegerList(path);
     }
-
-
 }
